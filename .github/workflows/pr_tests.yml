@@ -121,7 +121,7 @@ jobs:
         config:
           - name: Hub tests for models, schedulers, and pipelines
             framework: hub_tests_pytorch
-            runner: docker-cpu
+            runner: [self-hosted, linux, x64, ubuntu-2204, docker-cpu]
             image: diffusers/diffusers-pytorch-cpu
             report: torch_hub
 
