@@ -26,33 +26,33 @@ jobs:
         config:
           - name: Fast PyTorch Pipeline CPU tests
             framework: pytorch_pipelines
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-pytorch-cpu
             report: torch_cpu_pipelines
           - name: Fast PyTorch Models & Schedulers CPU tests
             framework: pytorch_models
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-pytorch-cpu
             report: torch_cpu_models_schedulers
           - name: LoRA
             framework: lora
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-pytorch-cpu
             report: torch_cpu_lora
           - name: Fast Flax CPU tests
             framework: flax
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-flax-cpu
             report: flax_cpu
           - name: PyTorch Example CPU tests
             framework: pytorch_examples
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-pytorch-cpu
             report: torch_example_cpu
 
     name: ${{ matrix.config.name }}
 
-    runs-on: ${{ matrix.config.runner }}
+    runs-on: [cpu-8, family-m5]
 
     container:
       image: ${{ matrix.config.image }}
@@ -135,13 +135,13 @@ jobs:
         config:
           - name: Hub tests for models, schedulers, and pipelines
             framework: hub_tests_pytorch
-            runner: docker-cpu
+            runner: kube-cpu
             image: diffusers/diffusers-pytorch-cpu
             report: torch_hub
 
     name: ${{ matrix.config.name }}
 
-    runs-on: ${{ matrix.config.runner }}
+    runs-on: [cpu-8, family-m5]
 
     container:
       image: ${{ matrix.config.image }}
